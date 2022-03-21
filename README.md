@@ -91,4 +91,64 @@ erDiagram
 
 ### Tests
 
-Rename the file `tests.py` to `test_topic.py`. 
+Rename the file `tests.py` to `test_topic.py`.
+
+Create a file in your cohort project directory called `pytest.ini` that contains the following
+
+```ini
+[pytest]
+DJANGO_SETTINGS_MODULE=cohort.settings
+```
+
+
+
+If you are using PyCharm, you can automatically run tests whenever changes are made. This reduces feedback time significantly. To do this:
+
+* Go to Run -> Edit Configurations
+* Click the + in the top left of the dialog
+* Choose pytest within Python tests
+* Set the target to "script path" and in the path box below, select the cohort subdirectory in your project.
+* Save this by pressing okay, then selecting Run -> Run pytest in cohort
+* Test runs will appear at the bottom of you window; to turn on auto-test, select the icon to the left two below the green run icon.
+
+Let's set up your first couple of tests working toward building this system.  Copy and paste the following into `test_topic.py`
+
+```python
+import factory.django
+import pytest
+from django.contrib.auth.models import User
+
+from forum.models import Topic
+
+
+class UserFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = User
+
+    email = factory.Faker('email')
+    username = factory.Faker('user_name')
+
+
+class TopicFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Topic
+
+    title = factory.Faker('sentence')
+    created_by = factory.SubFactory(UserFactory)
+
+
+@pytest.mark.django_db
+def describe_topic():
+    def exists():
+        TopicFactory()
+
+    def saves_its_fields():
+        topic = TopicFactory()
+
+        sut = Topic.objects.get(pk=topic.id)
+
+        assert sut.title == topic.title
+        assert sut.created_by == topic.created_by
+
+```
+
