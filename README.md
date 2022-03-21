@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-System with [git](https://git-scm.com/) and [docker compose](https://docs.docker.com/compose/) installed.
+System with [git](https://git-scm.com/) and [docker compose](https://docs.docker.com/compose/) installed. Working unix-like environment (WSL2 for windows, or a mac or linux machine)
 
 Editor or IDE ([PyCharm](https://www.jetbrains.com/pycharm/) recommended, either professional or community) capable of working with python files. I recommend you use the professional trial version.
 
