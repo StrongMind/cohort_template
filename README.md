@@ -2,7 +2,9 @@
 
 ## Prerequisites
 
-System with [git](https://git-scm.com/) and [docker compose](https://docs.docker.com/compose/) installed. Working unix-like environment (WSL2 for windows, or a mac or linux machine)
+System with [git](https://git-scm.com/) and [docker compose](https://docs.docker.com/compose/) installed. Working unix-like environment (WSL2 for windows, or a mac [with developer tools installed](https://www.freecodecamp.org/news/install-xcode-command-line-tools/) or linux machine)
+
+A github user account.
 
 Editor or IDE ([PyCharm](https://www.jetbrains.com/pycharm/) recommended, either professional or community) capable of working with python files. I recommend you use the professional trial version.
 
@@ -18,6 +20,8 @@ In WSL2 (windows) or a terminal (Mac)
 
 `docker-compose build`
 
+Open the project in pycharm by opening the project folder inside of it
+
 In PyCharm preferences (you may need to install the docker plugin, before this is available):
 
 * go to your project
@@ -25,13 +29,17 @@ In PyCharm preferences (you may need to install the docker plugin, before this i
 * click the settings icon next to your interpreter
 * click add
 * select "Docker Compose" in the left of the dialog
+* select the new button next to server
+  * on a Mac choose Docker for Mac
+  * (on windows?)
+
 * choose "web" in service and then click "OK"
 
 In WSL2 or a terminal:
 * To get a bash prompt inside your docker environment;
   * `docker-compose run web bash`
 * To start a new django project
-  * `django-admin.py startproject cohort`
+  * `django-admin startproject cohort`
 
 Those two steps should have created a new project inside your repository named "cohort". In the future, when we talk about "from a docker bash prompt", you will use `docker-compose run web bash` to get there. 
 
