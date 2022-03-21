@@ -10,7 +10,7 @@ Editor or IDE ([PyCharm](https://www.jetbrains.com/pycharm/) recommended, either
 
 ## Setup
 
-In github, [go to the template repository for this class](https://github.com/StrongMind/cohort_template), clone into your personal GitHub.
+In github, [go to the template repository for this class](https://github.com/StrongMind/cohort_template), clone into your personal GitHub, by selecting "Use This Template".
 
 In WSL2 (windows) or a terminal (Mac)
 
