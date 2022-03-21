@@ -54,3 +54,41 @@ From a docker bash prompt:
 In `cohort/settings.py`, you will see an `INSTALLED_APPS` section. This controls which applications a django project has installed. You can see several applications already installed that come as a standard part of django. Let's install our newly created application into this list, by adding "forum" to this list.
 
 ## Set Up tests
+
+This project comes set up in advance to use `pytest-describe`. From a docker bash prompt in the cohort project directory, run `pytest`. You should see similar output to this.
+
+```console
+root@f861c41270fe:/code/cohort# pytest
+================================================================================ test session starts ================================================================================
+platform linux -- Python 3.10.3, pytest-7.1.1, pluggy-1.0.0
+rootdir: /code/cohort
+plugins: Faker-13.3.2, django-4.5.2, describe-2.0.1
+collected 0 items                                                                                                                                                                   
+
+=============================================================================== no tests ran in 0.06s ===============================================================================
+root@f861c41270fe:/code/cohort# 
+
+```
+
+## Our first model
+
+We're going to create a discussion system. When creating a system like this, it helps to start "model out"; this way, we can already know what the APIs of our dependencies look like. Here's what our first model will look like. It will have an established relationship with a model that already exists by default in django, the user model.
+
+```mermaid
+erDiagram
+	User ||--o{ Topic : creates
+	Topic {
+		string title
+		datetime created_at
+		User created_by
+	}
+	User {
+	
+	}
+```
+
+
+
+### Tests
+
+Rename the file `tests.py` to `test_topic.py`. 
