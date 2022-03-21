@@ -41,4 +41,16 @@ Finally, right click on `docker-compose.yml` and click "run docker-compose.yml".
 
 In a browser, [go to http://localhost:8000](http://localhost:8000). You should now see a welcome page. You now have a django app successfully running.
 
+## Create an app
 
+A django project consists of applications. These can either be applications you create yourself, or applications installed from python packages available on PyPI (the python package repository). Reusable applications are a quick way to get significant chunks of functionality very quickly, as we will show you later.
+
+For now, though, let's start our first application!
+
+From a docker bash prompt:
+* `cd cohort`
+* `python manage.py startapp forum` this command creates an application in the project named "forum".
+
+In `cohort/settings.py`, you will see an `INSTALLED_APPS` section. This controls which applications a django project has installed. You can see several applications already installed that come as a standard part of django. Let's install our newly created application into this list, by adding "forum" to this list.
+
+## Set Up tests
