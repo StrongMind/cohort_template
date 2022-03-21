@@ -18,11 +18,13 @@ In WSL2 (windows) or a terminal (Mac)
 
 `git clone <your repo url here> ` where "your repo url here" is the URL of the cloned repository in your account
 
+change directory to where you cloned it.
+
 `docker-compose build`
 
 Open the project in pycharm by opening the project folder inside of it
 
-In PyCharm preferences (you may need to install the docker plugin, before this is available):
+In PyCharm preferences (file > settings on windows) (you may need to install the docker plugin, before this is available):
 
 * go to your project
 * go to "python interpreter"
@@ -30,8 +32,7 @@ In PyCharm preferences (you may need to install the docker plugin, before this i
 * click add
 * select "Docker Compose" in the left of the dialog
 * select the new button next to server
-  * on a Mac choose Docker for Mac
-  * (on windows?)
+  * choose Docker for Mac/Windows
 
 * choose "web" in service and then click "OK"
 
