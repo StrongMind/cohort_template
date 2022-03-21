@@ -152,3 +152,4 @@ def describe_topic():
 
 ```
 
+Now run the tests; if you're in a taught session, this is where we'll start. Otherwise, follow the errors!
