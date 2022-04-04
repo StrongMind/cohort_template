@@ -1,6 +1,6 @@
 # Cohorts Template
 
-[toc]
+
 
 # Session 1
 
@@ -167,15 +167,13 @@ Now run the tests; if you're in a taught session, this is where we'll start. Oth
 
 
 
-# Session 2
+## Answering the tests
 
-## Answering the tests from the last session
-
-In the last session, we created set up a project and created a few failing tests. In this session, we're first going to answer those tests and set up a few pieces of functionality.
+In the last section, we set up a project and created a few failing tests. In this session, we're first going to answer those tests and set up a few pieces of functionality.
 
 ### Set up models
 
-If you recall in the last session, our model looked like the following:
+Our model looked like the following:
 
 ```mermaid
 erDiagram
@@ -274,7 +272,7 @@ In the diagram above, we describe the links between a `Post`, a `Topic` and a `U
 
 ### Ping Pong Pairing
 
-We're going to a pairing and TDD workflow often called [Ping Pong Programming](https://openpracticelibrary.com/practice/ping-pong-programming/#:~:text=What%20Is%20Ping%2DPong%20Programming,of%20Pair%20Programming%20and%20TDD.). This look a bit like this.
+We're going to use a pairing and TDD workflow often called [Ping Pong Programming](https://openpracticelibrary.com/practice/ping-pong-programming/#:~:text=What%20Is%20Ping%2DPong%20Programming,of%20Pair%20Programming%20and%20TDD.). This look a bit like this.
 
 ```mermaid
 graph TD
@@ -304,4 +302,20 @@ If you look at your current `test_topic.py` file and `models.py` file, you'll se
 * Add fields to the model
 * Register the model in admin
 
-Let's try using a TDD flow to create a `Post` model. Ask lots of questions along the way!
+Let's try using a ping pong TDD flow to create a `Post` model. Ask lots of questions along the way!
+
+When you're done, ask these questions in your pair.
+
+* Did you always follow the red-green-refactor cycle?
+  * If not, what made that difficult?
+  * What could you do to make those things easier?
+* Are there ways you could change the code and that changes the material functionality that you just created without changing the tests?
+  * How do you know how safe your tests are when you create them?
+* If you were an engineer looking at this code for the first time, how would you understand why the tests and the code exists?
+* If you were an engineer removing functionality from this application, how would you know how to safely do that?
+* If you were an engineer adding functionality to this application, how confident would you be that your new functionality did not break existing functionality?
+* What was good about this pairing style?
+* What was challenging about this pairing style?
+
+
+
