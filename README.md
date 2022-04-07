@@ -1,35 +1,30 @@
 # Cohorts Template
 
-
-
 # Session 1
 
 ## Prerequisites
 
-System with [git](https://git-scm.com/) installed (Tested with Mac and Windows. Should work happily on Linux). 
-
-A github user account.
-
-Editor or IDE ([PyCharm](https://www.jetbrains.com/pycharm/) recommended, either professional or community) capable of working with python files. I recommend you use the professional trial version of PyCharm, and our instructions will assume that. You will need to self-adapt the instructions if you use something different.
-
-[Pop](https://pop.com/) in order to pair with other members if not local.
+* System with [git](https://git-scm.com/) installed (Tested with Mac and Windows. Should work happily on Linux). 
+* A GitHub user account.
+* Editor or IDE ([PyCharm](https://www.jetbrains.com/pycharm/) recommended, either professional or community) capable of working with Python files. I recommend you use the professional trial version of PyCharm, and our instructions will assume that. You will need to self-adapt the instructions if you use something different.
+* [Pop](https://pop.com/) in order to pair with other members if not local.
 
 ## Setup
 
-In github, [go to the template repository for this class](https://github.com/StrongMind/cohort_template), clone into your personal GitHub, by selecting "Use This Template".
+In GitHub, [go to the template repository for this class](https://github.com/StrongMind/cohort_template), and clone into your personal GitHub by selecting "Use This Template".
 
-In a terminal window,
+In a terminal window:
+* `git clone <your repo url here> ` 
+	* where "your repo url here" is the URL of the cloned repository in your account change directory to where you cloned it.
 
-`git clone <your repo url here> ` where "your repo url here" is the URL of the cloned repository in your account change directory to where you cloned it.
+* `docker-compose build`
 
-`docker-compose build`
+Open the project in PyCharm by opening the project folder inside of it.
 
-Open the project in pycharm by opening the project folder inside of it
-
-In PyCharm preferences (file > settings on windows) (you may need to install the docker plugin, before this is available):
+In PyCharm preferences (file > settings on Windows) (you may need to install the docker plugin, before this is available):
 
 * go to your project
-* go to "python interpreter"
+* go to "Python interpreter"
 * click the settings icon next to your interpreter
 * click add
 * select "Docker Compose" in the left of the dialog
@@ -39,9 +34,9 @@ In PyCharm preferences (file > settings on windows) (you may need to install the
 * choose "web" in service and then click "OK"
 
 In WSL2 or a terminal:
-* To get a bash prompt inside your docker environment;
+* To get a bash prompt inside your docker environment:
   * `docker-compose run web bash`
-* To start a new django project
+* To start a new django project:
   * `django-admin startproject cohort`
 
 Those two steps should have created a new project inside your repository named "cohort". In the future, when we talk about "from a docker bash prompt", you will use `docker-compose run web bash` to get there. 
@@ -54,7 +49,7 @@ In a browser, [go to http://localhost:8000](http://localhost:8000). You should n
 
 ## Create an app
 
-A django project consists of applications. These can either be applications you create yourself, or applications installed from python packages available on PyPI (the python package repository). Reusable applications are a quick way to get significant chunks of functionality very quickly, as we will show you later.
+A django project consists of applications. These can either be applications you create yourself, or applications installed from Python packages available on PyPI (the python package repository). Reusable applications are a quick way to get significant chunks of functionality very quickly, as we will show you later.
 
 For now, though, let's start our first application!
 
@@ -104,7 +99,7 @@ erDiagram
 
 Rename the file `tests.py` to `test_topic.py`.
 
-Create a file in your cohort project directory called `pytest.ini` that contains the following
+Create a file in your cohort project directory called `pytest.ini` that contains the following:
 
 ```ini
 [pytest]
@@ -166,7 +161,6 @@ def describe_topic():
 Now run the tests; if you're in a taught session, this is where we'll start. Otherwise, follow the errors!
 
 
-
 ## Answering the tests
 
 In the last section, we set up a project and created a few failing tests. In this session, we're first going to answer those tests and set up a few pieces of functionality.
@@ -188,9 +182,12 @@ erDiagram
 	}
 ```
 
-The tests that we have set up expect you to create a `Topic` model.  A model is a representation of a business object as a class, which in the case of most MVC frameworks is mapped to a database table using [an ORM](https://en.wikipedia.org/wiki/Object-relational_mapping).  
+The tests that we have set up expect you to create a `Topic` model.  A model is a representation of a business object as a class, which in the case of most [MVC](https://developer.mozilla.org/en-US/docs/Glossary/MVC) frameworks is mapped to a database table using [an ORM](https://en.wikipedia.org/wiki/Object-relational_mapping).  
 
-Update two files to match the linked files : [test_topic.py](https://gist.githubusercontent.com/markng/19f2d7861a0df0a2b4849037fe0c0e07/raw/8ab62a4f41df7ca5b3a80b15878bef23dbf449a3/test_topic.py) and [requirements.txt](https://gist.githubusercontent.com/markng/1c7cdfed4972169251d6ff54e27a926a/raw/ba57995164e8575c30495595991dff6ff0dd7dbe/requirements.txt). This is to fix an oversight where we forgot to set a test to check for `created_at`. You may need to rebuild your dependencies using `docker-compose build`.
+Update your two respective files to match the following linked files:
+* [test_topic.py](https://gist.githubusercontent.com/markng/19f2d7861a0df0a2b4849037fe0c0e07/raw/8ab62a4f41df7ca5b3a80b15878bef23dbf449a3/test_topic.py)
+* [requirements.txt](https://gist.githubusercontent.com/markng/1c7cdfed4972169251d6ff54e27a926a/raw/ba57995164e8575c30495595991dff6ff0dd7dbe/requirements.txt)
+	* This is to fix an oversight where we forgot to set a test to check for `created_at`. You may need to rebuild your dependencies using `docker-compose build`.
 
 Take a look at the [django models documentation](https://docs.djangoproject.com/en/4.0/topics/db/models/) and [django migrations documentation](https://docs.djangoproject.com/en/4.0/topics/migrations/).
 
@@ -211,7 +208,7 @@ Add the following test to your pre-existing topic tests:
         assert admin_site.is_registered(Topic)
 ```
 
-this will be inside the `describe_topic` definition. How do you think we could make this test pass?
+This will be inside the `describe_topic` definition. How do you think we could make this test pass?
 
 ### Solution
 
@@ -290,7 +287,7 @@ graph TD
 	Refactor2 --> Red1
 ```
 
-The TDD cycle is often talked about as
+The TDD cycle is often talked about as:
 
 * Red (write a test, which in most test suites turns "Red" to reflect failure)
 * Green (respond to a test, which in most test suites turns "Green" to reflect success)
