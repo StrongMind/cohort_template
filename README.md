@@ -338,6 +338,8 @@ We're going to create 4 views, tests and corresponding templates, with the follo
   * on success, adds a fragment identifier to the redirect that will make a browser go to that comment
   * on failure, will display validation failures in the form
 
+### Topic List View
+
 You already have the required models to do that! Let's do the topic list view first. Add the following lines of code to `test_topic_views.py` in your forum folder.
 
 ```python
@@ -401,4 +403,8 @@ Fulfill the above tests:
     * How might we replicate similar things in testing frameworks that have no ability to nest tests in contexts?
     * Which testing frameworks in our work do we have access to that have this capability?
     * What are the potential disadvantages of this capability?
+
+### Topic Detail View
+
+Now that we've done the topic list view, how would you make a similar set of tests and TDD a topic detail view? Go ahead and do that, and let's talk about how that went afterwards.
 
