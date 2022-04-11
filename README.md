@@ -316,3 +316,89 @@ When you're done, ask these questions in your pair.
 
 
 
+## Adding end user functionality
+
+We now have an admin interface and models to represent our Topics and Posts within discussion board. Let's get users posting directly to them!
+
+> Note: Django uses a style of framework that they call MTV; which stands for "Models, Templates and Views". This is a slightly different interpretation of the MVC pattern. Roughly, a model is equivalent with MVC frameworks, a template is equivalent to a View and a VIew is equivalent to a controller, other than that some parts of the "controller" are automatically handled by the framework. For the sake of this document, MVC and MTV are close enough to use them interchangably.
+
+We're going to create 4 views, tests and corresponding templates, with the following specification, where "1" is the primary key of the topic model.
+
+* topic list view
+  * at GET http://localhost:8000/topics/
+* topic detail view
+  * at GET http://localhost:8000/topics/1
+* topic create view
+  * at POST http://localhost:8000/topics/
+  * on success, redirects to the created topics "topic detail view"
+  * on failure, will display validation failures in the form
+* post create view
+  * at POST http://localhost:8000/topics/1/posts/
+  * on success, redirects to the created topics "topic detail view"
+  * on success, adds a fragment identifier to the redirect that will make a browser go to that comment
+  * on failure, will display validation failures in the form
+
+You already have the required models to do that! Let's do the topic list view first. Add the following lines of code to `test_topic_views.py` in your forum folder.
+
+```python
+import pytest
+from django.http import Http404
+from django.test import RequestFactory
+
+from forum.test_topic import TopicFactory
+from forum.views import TopicListView
+
+
+@pytest.mark.django_db
+def describe_a_topic_list_view():
+    @pytest.fixture
+    def view_class():
+        return TopicListView()
+
+    @pytest.fixture
+    def view():
+        return TopicListView.as_view()
+
+    @pytest.fixture
+    def http_request():
+        return RequestFactory().get("/topics/")
+
+    def it_exists():
+        assert TopicListView()
+
+    def describe_with_no_topics():
+        def it_returns_a_404_response(http_request):
+            with pytest.raises(Http404):
+                TopicListView.as_view()(http_request)
+
+    def describe_with_topics():
+        @pytest.fixture
+        def topics():
+            return TopicFactory.create_batch(5)
+
+        def it_returns_a_200_response(http_request, topics):
+            response = TopicListView.as_view()(http_request)
+            assert response.status_code == 200
+
+        def it_returns_topics_in_our_template_context(http_request, topics, view_class):
+            view_class.setup(http_request)
+            view_class.get(http_request)
+
+            context = view_class.get_context_data()
+
+            assert list(context['object_list']) == topics
+           
+```
+
+Fulfill the above tests:
+
+* Using [Django Generic Class Based Views](https://docs.djangoproject.com/en/4.0/topics/class-based-views/generic-display/)
+* Consider:
+  * what are these tests doing
+  * what are these tests missing in order to be complete tests of whether we can use this view?
+    * what might we do to complete these tests?
+  * How are the inner descriptions useful
+    * How might we replicate similar things in testing frameworks that have no ability to nest tests in contexts?
+    * Which testing frameworks in our work do we have access to that have this capability?
+    * What are the potential disadvantages of this capability?
+
