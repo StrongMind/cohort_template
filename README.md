@@ -399,7 +399,7 @@ Now that we've done the topic list view, how would you make a similar set of tes
 
 ### Topic and Post creation views
 
-Change your topic_view_test to the following.
+Change your topic_view_test to the following. You can use the [Django Edit Generic View](https://docs.djangoproject.com/en/4.0/ref/class-based-views/generic-editing/) documentation to find some ways to respond to these tests.
 
 ```python
 import pytest
