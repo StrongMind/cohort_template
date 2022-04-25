@@ -17,11 +17,7 @@ In a terminal window:
 * `git clone <your repo url here> ` 
 	* where "your repo url here" is the URL of the cloned repository in your account change directory to where you cloned it.
 
-* `docker-compose build`
-
-Open the project in PyCharm by opening the project folder inside of it.
-
-In PyCharm preferences (file > settings on Windows) (you may need to install the docker plugin, before this is available):
+* Open the project in PyCharm by opening the project folder inside of it.
 
 * go to your project
 * go to "Python interpreter"
@@ -343,14 +339,6 @@ We're going to create 4 views, tests and corresponding templates, with the follo
 You already have the required models to do that! Let's do the topic list view first. Add the following lines of code to `test_topic_views.py` in your forum folder.
 
 ```python
-import pytest
-from django.http import Http404
-from django.test import RequestFactory
-
-from forum.test_topic import TopicFactory
-from forum.views import TopicListView
-
-
 @pytest.mark.django_db
 def describe_a_topic_list_view():
     @pytest.fixture
@@ -373,6 +361,10 @@ def describe_a_topic_list_view():
             with pytest.raises(Http404):
                 TopicListView.as_view()(http_request)
 
+        def it_responds_with_a_404_from_its_url(client):
+            response = client.get("/topics/")
+            assert response.status_code == 404
+
     def describe_with_topics():
         @pytest.fixture
         def topics():
@@ -389,22 +381,20 @@ def describe_a_topic_list_view():
             context = view_class.get_context_data()
 
             assert list(context['object_list']) == topics
-           
+
+        def it_responds_with_a_200_from_its_url(client, topics):
+            response = client.get("/topics/")
+            assert response.status_code == 200
+            assert list(response.context_data['object_list']) == topics
+
 ```
 
 Fulfill the above tests:
 
 * Using [Django Generic Class Based Views](https://docs.djangoproject.com/en/4.0/topics/class-based-views/generic-display/)
-* Consider:
-  * what are these tests doing
-  * what are these tests missing in order to be complete tests of whether we can use this view?
-    * what might we do to complete these tests?
-  * How are the inner descriptions useful
-    * How might we replicate similar things in testing frameworks that have no ability to nest tests in contexts?
-    * Which testing frameworks in our work do we have access to that have this capability?
-    * What are the potential disadvantages of this capability?
 
 ### Topic Detail View
 
-Now that we've done the topic list view, how would you make a similar set of tests and TDD a topic detail view? Go ahead and do that, and let's talk about how that went afterwards.
+Now that we've done the topic list view, how would you make a similar set of tests and (optionally) TDD a topic detail view? Go ahead and do that, and let's talk about how that went afterwards.
 
+### Topic and Post creation views
